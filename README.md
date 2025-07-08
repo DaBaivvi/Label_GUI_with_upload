@@ -40,7 +40,7 @@ cd Label_GUI_with_upload
 	2.	Run the GUI:
 python main.py
 
-3.	Use the interface to:
+	3.	Use the interface to:
 	•	Load a CSV file
 	•	View flow data plots
 	•	Label and save your annotations
