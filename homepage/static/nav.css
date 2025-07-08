@@ -1,0 +1,96 @@
+/* 设置基本页面样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;  /* 淡蓝色背景 */
+    margin: 0px;
+}
+
+/* 导航栏样式 */
+header {
+    background-color: #00838f; /* 深蓝色背景 */
+    padding: 10px;
+    width: 100%;              /* 让 header 和 nav 填满顶部 */
+    color: white;
+}
+
+nav {
+    display: flex;
+    margin-right: 20px;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .left h1 {
+    color: white;
+    margin: 8px;
+    font-size: 22px;
+}
+
+nav .center {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    gap: 30px;
+}
+
+nav .center a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 30px;
+    transition: color 0.3s ease;
+}
+
+nav .center a:hover {
+    color: #ffeb3b;  /* 当鼠标悬停时改变颜色 */
+}
+
+nav .right {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    gap: 30px;
+
+}
+nav .right a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    margin: 5px;
+    transition: color 0.3s ease;
+}
+
+nav .right a:hover {
+    color: #ffeb3b;
+}
+
+/* 主体内容样式 */
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    color: #00796b;
+    font-size: 28px;
+}
+
+section p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* 页脚样式 */
+footer {
+    background-color: #00838f;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

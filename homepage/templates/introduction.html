@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Labeling interface</title>
+
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+    <link rel="stylesheet" href="{% static 'introduction.css' %}">
+
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav>
+            <div class="left">
+                <h1>Labeling interface</h1>
+            </div>
+            <div class="center">
+                <a href="{% url 'introduction' %}">Introduction</a>
+                <a href="{% url 'labelpage:label_redirect' %}">Labeling</a>
+            </div>
+            <div class="right">
+                {% if user.is_authenticated %}
+                    <!-- 如果用户已登录，显示欢迎语和登出按钮 -->
+                    <span>Welcome, {{ user.username }}!</span>
+                    <a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
+                {% else %}
+                    <!-- 如果用户未登录，显示登录和注册按钮 -->
+                    <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                    <a href="{% url 'register' %}?next={{ request.path }}">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主体内容 -->
+    <!-- 主体内容 -->
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>This website is designed for labeling voiding data profiles. Below is a detailed explanation of its functionality and structure.</p>
+            <ol>
+                <li><strong>Registration and Login</strong><br>
+                    First, you need to create a personal account and log in. ❗️ This step is crucial, as you can only access the urine flow data and begin labeling after logging in. ❗️
+                </li>
+                <li><strong>Structure of the Website</strong><br>
+                    The website consists of two main pages:
+                    <ul>
+                        <li><strong>Introduction Page:</strong> This page provides a detailed guide on how to use the platform. It helps you become familiar with its features and operations.</li>
+                        <li><strong>Labeling Page:</strong> This page is divided into three main sections:
+                            <ul>
+                                <li><strong>Graph:</strong> At the top, a chart is displayed showing the urine flow rate over time.</li>
+                                <li><strong>Data Information:</strong> Below the chart, you’ll find detailed information about the corresponding urine flow data.</li>
+                                <li><strong>Labeling Section:</strong> Using the described data and based on your medical expertise and experience, you determine whether the data is normal or belongs to a specific abnormal category.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Saving and Updating Labels</strong><br>
+                    After selecting the appropriate category, click "Save and Next." A notification—“Tag saved successfully”—will confirm that the data has been successfully saved to the database. Any updates to the labels will automatically synchronize with the database, ensuring consistency without additional effort.
+                </li>
+                <li><strong>Status Overview and Continuing Work</strong><br>
+                    At the bottom of the page, you can view the status of your labels, including marked and unmarked charts. You can use the "Exit" function anytime to take a break. Upon logging in again, you can seamlessly resume from where you left off and continue labeling until the task is completed.
+                </li>
+            </ol>
+            <p>Thank you for your time and participation in this project. Your valuable contribution is greatly appreciated! 😊</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Fachgebiet Adaptive Lichttechnische Systeme und Visuelle Verarbeitung </p>
+    </footer>
+</body>
+</html>

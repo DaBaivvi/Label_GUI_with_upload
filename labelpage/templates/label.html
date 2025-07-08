@@ -1,0 +1,165 @@
+{% load static custom_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'label.css' %}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav>
+            <div class="left">
+                <h1>Labeling Interface</h1>
+            </div>
+            <div class="center">
+                <a href="{% url 'introduction' %}">Introduction</a>
+                <a href="{% url 'labelpage:label_redirect' %}">Labeling</a>
+            </div>
+            <div class="right">
+                <span>Welcome, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+        <div class="progress">
+            Progress: {{ progress }}
+        </div>
+
+        <!-- 条件显示 -->
+        <div class ='container'>
+                <div class="left-panel">
+                    {% if not all_labeled %}
+                        <!-- Plotly 图表 -->
+                        {{ graph_html|safe }}
+                    {% endif %}
+                    <div class="parameters">
+                        <div class="param-row">
+                            <span class="param-label">Username:</span>
+                            <span class="param-value">{{ user.username }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Image Number:</span>
+                            <span class="param-value">{{ csv_data.image_number }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Sex:</span>
+                            <span class="param-value">{{ csv_data.sex }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Age:</span>
+                            <span class="param-value">{{ csv_data.age }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Max.Flow Rate (ml/s):</span>
+                            <span class="param-value">{{ csv_data.max_flow_rate }} {{ csv_data.max_flow_rate_unit }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Avg.Flow Rate (ml/s):</span>
+                            <span class="param-value">{{ csv_data.average_flow_rate }} {{ csv_data.average_flow_rate_unit }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Increase time (s):</span>
+                            <span class="param-value">{{ csv_data.increase_time }} {{ csv_data.increase_time_unit }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Total volume voided (ml):</span>
+                            <span class="param-value">{{ csv_data.total_volume_voided }} {{ csv_data.total_volume_voided_unit }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Total voiding time (s):</span>
+                            <span class="param-value">{{ csv_data.total_voiding_time }} {{ csv_data.total_voiding_time_unit }}</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-label">Total Flow time (s):</span>
+                            <span class="param-value">{{ csv_data.total_flow_time }} {{ csv_data.total_flow_time_unit }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-panel">
+                    {% if not all_labeled %}
+                        <form method="POST" id="label-form">
+                            {% csrf_token %}
+                            <div class="label-type-wrapper">
+                                {{ form.label_type }}
+                            </div>
+                            <div id="abnormal-subtype" style="display: none;">
+                                {{ form.abnormal_subtype }} 
+                            </div>
+                            <button type="submit" class="save-tags-btn">Save and Next</button> 
+                        </form>
+                    {% endif %}
+
+                    <div class="navigation">
+                        <!-- 第-行：Go to First Image, Go to Last Image, Exit Marking -->
+                        <div class="nav-line">
+                            {% if previous_csv_id %}
+                                <a href="{% url 'label' previous_csv_id %}">Back</a>
+                            {% endif %}
+                            {% if next_csv_id %}
+                                <a href="{% url 'label' next_csv_id %}">Next</a>
+                            {% endif %}
+                            {% if last_labeled_csv_id %}
+                                <a href="{% url 'label' last_labeled_csv_id %}">Go to Last Labeled Image</a>
+                            {% endif %}
+                            {% if first_csv_id %}
+                                <a href="{% url 'label' first_csv_id %}">Go to First Image</a>
+                            {% endif %}
+                            {% if last_csv_id %}
+                                <a href="{% url 'label' last_csv_id %}">Go to Last Image</a>
+                            {% endif %}
+                            <a href="{% url 'introduction' %}">Exit</a>
+                        </div>
+                    </div>
+
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                    {{ message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <div class="labeled-entries">
+                        <h2>Already Labeled Entries and not Labeled Entries</h2>
+                        <!-- 已标记条目列表 -->
+                        {% if all_csv %}
+                            <ul>
+                                {% for entry in all_csv %}
+                                    <li class="{% if entry.id == current_csv_id %}current-entry{% endif %}">
+                                        <a href="{% url 'label' entry.id %}">
+                                            {% with label=label_dict|get_item:entry.id %}
+                                                <span class="label-icon {% if label and label.label_type == 'normal' %}normal-icon{% elif label and label.label_type == 'abnormal' %}abnormal-icon{% else %}unlabeled-icon{% endif %}"></span>
+                                                Image {{ entry.image_number }} - 
+                                                {% if label %}
+                                                    {{ label.label_type }}
+                                                    {% if label.label_type == 'abnormal' and label.abnormal_subtype %} - {{ label.abnormal_subtype }}
+                                                    {% endif %}
+                                                    <span> by {{ label.labeled_by.username }} on {{ label.label_time|date:"Y-m-d H:i" }}</span>
+                                                {% else %}
+                                                    Not Labeled
+                                                {% endif %}
+                                            {% endwith %}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>You have completed all the labeling tasks. Thank you! 😊</p>
+                        {% endif %}   
+                    </div>
+                </div>
+        </div>
+
+        <!-- 引用外部JS -->
+        <script src="{% static 'label.js' %}"></script>
+
+</body>
+</html>

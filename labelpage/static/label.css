@@ -1,0 +1,340 @@
+/* 简单的样式调整 */
+.progress {
+    margin-top: 22px;
+    margin-left: 160px;
+    font-weight: bold;
+}
+
+
+.alert alert-success {
+    background-color: #4CAF50; /* 绿色背景 */
+    margin-top: 22px;
+    margin-left: 160px;    /* 与 .progress 相同的左边距 */
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 20px;
+    color: white;
+}
+
+/* 按钮样式 */
+.button {
+    background-color: #00838f; /* 示例主色 */
+    color: #fff;
+    border: none;
+    padding: 4px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;            /* 与外部匹配 */
+    /* 间距 */
+    margin-top: 8px;
+    width: 120px;
+    height: 30px;
+    text-align: center;         /* 使文本居中 */
+    display: inline-block;      /* 使按钮在行内显示 */
+    text-decoration: none;      /* 移除下划线 */
+}
+
+/* 按钮悬停效果（可选） */
+.button:hover {
+    background-color: #006064; /* 更深的蓝绿色背景 */
+}
+
+
+.container {
+    width: 88%;
+    margin: 10px auto;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-panel {
+    width: 50%;
+    padding: 10px;
+}
+
+/* 参数信息块 */
+.parameters {
+    background-color: #e0f7fa;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+/* 每一行放 label 和 value */
+.param-row {
+    display: flex;      /* 让这一行使用横向flex布局 */
+    margin: 6px 0;      /* 行间垂直间距 */
+    align-items: center;/* 垂直居中(可选) */
+}
+
+/* 标签列 */
+.param-label {
+    width: 200px;       /* 固定标签列宽 */
+    text-align: left;  /* 让标签文字右对齐 */
+    margin-right: 40px;  /* 标签和值之间留出一点横向距离 */
+    white-space: nowrap;
+    font-weight: bold;  /* 标签更醒目 */
+}
+
+/* 值列 */
+.param-value {
+    flex: 1;            /* 剩余空间都给 value */
+}
+
+
+.right-panel {
+    width: 50%;
+    padding: 10px;
+}
+
+/* 2. 控制 form 内部布局 */
+#label-form {
+    display: flex;
+    font-size: 17px;
+    flex-direction: column;     /* 垂直堆叠 */
+    gap: 20px;                  /* 间距：让各部分之间留出10px */
+}
+
+/* 3. 单选框组：Normal、Abnormal */
+.label-type-group {
+    /* 如果想让每个单选项有较大间隔，可把单选框改成块状 */
+    display: flex;
+    flex-direction: column; /* 每个单选占一行 */
+    gap: 15px;               /* 选项间距 */
+    font-size: inherit;     /* 保持与外部一致，也可指定14px等 */
+}
+
+.label-type-wrapper {
+    display: flex;
+    flex-direction: column; /* 纵向排布 */
+    gap: 8px;              /* 每行之间的间距 */
+    margin: 12px 0;        /* 让整个块上下留点间距 */
+}
+
+.label-type-wrapper label {
+    display: block;        /* 让标签占整行 */
+    margin-bottom: 8px; 
+    cursor: pointer;       /* 鼠标移到文字上也能点击 */
+}
+
+/* 4. Abnormal子选项组 */
+.abnormal-subtype-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: inherit;
+}
+
+/* 如果 Django 表单渲染出的是 <label><input> 的形式，可这样 */
+#abnormal-subtype label {
+    display: block;        /* 每个选项独占一行 */
+    margin-bottom: 8px;    /* 每行之间的间距 */
+    cursor: pointer;  
+}
+
+/* 若需要每个radio的文字上下留白，可写: */
+#abnormal-subtype input[type="radio"] {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* 如果需要统一调整单选框与文字之间的距离，可这样 */
+.label-type-group input[type="radio"],
+.abnormal-subtype-group input[type="radio"] {
+    margin-right: 10px;  /* 调整单选框与文字的水平间隔 */
+}
+
+/* 5. 保存按钮 */
+.save-tags-btn {
+    /* 外观 */
+    background-color: #00838f; /* 示例主色 */
+    color: #fff;
+    border: none;
+    padding: 4px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;     /* 与外部匹配 */
+    /* 间距 */
+    margin-top: 8px;
+    width: 120px;
+    height: 30px; 
+}
+
+/* 使按钮在hover时有反馈 */
+.save-tags-btn:hover {
+    background-color: #006d78;
+}
+
+
+.parameters {
+    margin-top: 20px;
+}
+
+
+.navigation {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 每行里的链接排列 */
+.nav-line {
+    display: flex;
+    gap: 10px; /* 链接之间的间距 */
+    /* 如果想把链接都居右对齐，写 justify-content: flex-end; */
+    /* 若想左对齐(在right-panel里不一定贴左),可修改 align-items 或 justify-content */
+}
+
+/* 链接样式，仅示例 */
+.nav-line a {
+    text-decoration: none;
+    background-color: #00838f; /* 与全局主题一致 */
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* 如果您想给Exit Marking不同颜色，也可以单独写 */
+.nav-line a:last-child {
+    background-color: #f44336; /* 红色退出 */
+}
+
+/* 新增按钮样式 */
+.last-labeled-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #28a745; /* 绿色背景 */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.last-labeled-btn:hover {
+    background-color: #218838; /* 深绿色背景 */
+}
+
+.messages {
+    list-style-type: none;
+    padding: 0;
+}
+.messages li {
+    padding: 10px;
+    margin-top: 5px;
+}
+
+/* 已标记条目列表 */
+.labeled-entries {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    max-height: 400px; /* 设置最大高度，根据需要调整 */
+    overflow-y: auto;  /* 启用垂直滚动 */
+    /* 可选：添加背景色和内边距，提升可读性 */
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* 滚动条样式（适用于Webkit浏览器，如Chrome和Safari） */
+.labeled-entries::-webkit-scrollbar {
+    width: 8px;
+}
+
+.labeled-entries::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.labeled-entries::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.labeled-entries::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+}
+
+
+.labeled-entries h2 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.labeled-entries ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.labeled-entries li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.labeled-entries li.current-entry {
+    background-color: #e0f7fa;
+    border-left: 5px solid #007bff;
+}
+
+.labeled-entries a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.labeled-entries a:hover {
+    text-decoration: underline;
+}
+
+.labeled-entries span {
+    color: #7e7a7a;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+
+/* 标签类型图标 */
+.label-icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.normal-icon {
+    background-color: green;
+}
+
+.abnormal-icon {
+    background-color: red;
+}
+
+.unlabeled-icon {
+    background-color: rgb(146, 143, 143);
+}
+
+/* 响应式设计 */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-panel, .right-panel {
+    flex: 1;
+    min-width: 300px;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .left-panel, .right-panel {
+        flex: 100%;
+    }
+}

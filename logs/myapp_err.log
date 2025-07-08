@@ -1,0 +1,26 @@
+[2025-02-03 19:18:37 +0100] [54045] [INFO] Starting gunicorn 23.0.0
+[2025-02-03 19:18:37 +0100] [54045] [INFO] Listening at: http://0.0.0.0:8000 (54045)
+[2025-02-03 19:18:37 +0100] [54045] [INFO] Using worker: sync
+[2025-02-03 19:18:37 +0100] [54046] [INFO] Booting worker with pid: 54046
+[2025-02-03 19:18:37 +0100] [54047] [INFO] Booting worker with pid: 54047
+[2025-02-03 19:18:37 +0100] [54048] [INFO] Booting worker with pid: 54048
+[2025-02-03 19:18:37 +0100] [54049] [INFO] Booting worker with pid: 54049
+[2025-02-03 19:20:33 +0100] [54045] [INFO] Handling signal: term
+[2025-02-03 19:20:33 +0100] [54047] [INFO] Worker exiting (pid: 54047)
+[2025-02-03 19:20:33 +0100] [54046] [INFO] Worker exiting (pid: 54046)
+[2025-02-03 19:20:33 +0100] [54048] [INFO] Worker exiting (pid: 54048)
+[2025-02-03 19:20:33 +0100] [54049] [INFO] Worker exiting (pid: 54049)
+[2025-02-03 19:20:33 +0100] [54045] [INFO] Shutting down: Master
+[2025-02-03 19:20:33 +0100] [54113] [INFO] Starting gunicorn 23.0.0
+[2025-02-03 19:20:33 +0100] [54113] [INFO] Listening at: http://0.0.0.0:8000 (54113)
+[2025-02-03 19:20:33 +0100] [54113] [INFO] Using worker: sync
+[2025-02-03 19:20:33 +0100] [54114] [INFO] Booting worker with pid: 54114
+[2025-02-03 19:20:33 +0100] [54115] [INFO] Booting worker with pid: 54115
+[2025-02-03 19:20:33 +0100] [54116] [INFO] Booting worker with pid: 54116
+[2025-02-03 19:20:33 +0100] [54117] [INFO] Booting worker with pid: 54117
+[2025-02-04 12:35:13 +0100] [54113] [INFO] Handling signal: term
+[2025-02-04 12:35:13 +0100] [54114] [INFO] Worker exiting (pid: 54114)
+[2025-02-04 12:35:13 +0100] [54117] [INFO] Worker exiting (pid: 54117)
+[2025-02-04 12:35:13 +0100] [54115] [INFO] Worker exiting (pid: 54115)
+[2025-02-04 12:35:13 +0100] [54116] [INFO] Worker exiting (pid: 54116)
+[2025-02-04 12:35:14 +0100] [54113] [INFO] Shutting down: Master

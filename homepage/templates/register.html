@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav>
+            <div class="left">
+                <h1>Labeling Interface</h1>
+            </div>
+            <div class="center">
+                <a href="{% url 'introduction' %}">Introduction</a>
+                <a href="{% url 'labelpage:label_redirect' %}">Labeling</a>
+            </div>
+            <div class="right">
+                <!-- 点击登录按钮弹出模态框 -->              
+                <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 注册表单 -->
+    <div class="content">
+        <h2>Register</h2>
+        <form method="post" id="RegisterForm" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+        <!-- 显示错误信息 -->
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+    </div>
+    
+    <!-- 引用外部的 JavaScript 文件 -->
+    <script src="{% static 'register.js' %}"></script>
+</body>
+</html>
